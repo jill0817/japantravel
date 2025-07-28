@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hants">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/style.scss" />
+
+    <style>
+      * {
+        font-family: "Noto Sans JP", "Yu Gothic UI", "Hiragino Kaku Gothic ProN",
+          "Meiryo", sans-serif;
+      }
+    </style>
+
+    <title>日本深度旅遊推薦</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <img class="fixed-image" src="./images/富士山2.jpg" alt="fixed-image" />
+    <header>
+      <section class="logo">
+        <img src="./images/網站Logo.svg" alt="日本旅遊網Logo" />
+        <h1>2025日本深度旅遊推薦</h1>
+      </section>
+      <nav>
+        <ul>
+          <li>
+            <a href="japan-local.html"
+              ><i class="fa-solid fa-plane"></i> 日本旅遊</a
+            >
+          </li>
+          <li>
+            <a href="login.html"
+              ><i class="fa-solid fa-right-to-bracket"></i> 會員登入</a
+            >
+          </li>
+          <li>
+            <a href="reserve.html"><i class="fa-solid fa-book"></i> 預約行程</a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-regular fa-address-book"></i> 聯絡我們</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="background-img">
+        <div class="filter"></div>
+        <h3>
+          比地圖更深的旅行，從這裡開始<br />去別人沒去的地方，感受你自己的日本
+        </h3>
+      </section>
+
+      <section class="info-circles">
+        <h3>遊玩主題</h3>
+        <div class="circles">
+          <div class="circle">
+            <a href="japan-local.html">
+              <img src="./images/東北之旅.JPEG" alt="東北之旅" />
+              <p>東北雪景美不勝收</p>
+            </a>
+          </div>
+          <div class="circle">
+            <a href="japan-local.html">
+              <img src="./images/日本壽司.jpg" alt="金澤" />
+              <p>金澤古韻與藝術文化</p>
+            </a>
+          </div>
+          <div class="circle">
+            <a href="japan-local.html">
+              <img src="./images/富士山.jpg" alt="四國" />
+              <p>四國信仰與自然交織</p>
+            </a>
+          </div>
+          <div class="circle">
+            <a href="japan-local.html">
+              <img src="./images/清水寺.jpg" alt="廣島" />
+              <p>廣島歷史與自然共生</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="empty-container">
+        <h3>今天就開始規劃行程，深入日本旅遊去!</h3>
+      </section>
+    </main>
+
+    <footer>
+      <section class="logo">
+        <img src="./images/網站Logo.svg" alt="logo" />
+        <h3>2025日本深度旅遊推薦</h3>
+      </section>
+
+      <section class="links">
+        <a href="#"
+          ><img title="Facebook頁面" src="./Icons/facebook.svg" alt="facebook"
+        /></a>
+        <a href="#"
+          ><img title="IG頁面" src="./Icons/instagram.svg" alt="instagram"
+        /></a>
+        <a href="#"
+          ><img title="twitter頁面" src="./Icons/twitter.svg" alt="twitter"
+        /></a>
+        <a href="#"
+          ><img title="youtube頻道" src="./Icons/youtube.svg" alt="youtube"
+        /></a>
+      </section>
+    </footer>
+
+    <script>
+      const images = [
+        "./images/日本櫻花.jpg",
+        "./images/京都古城.jpg",
+        "./images/大阪街頭.jpg",
+      ];
+      let current = 0;
+
+      setInterval(() => {
+        const topBackground = document.querySelector("section.background-img");
+        current = (current + 1) % images.length;
+        topBackground.style.backgroundImage = `url('${images[current]}')`;
+      }, 3000);
+    </script>
+  </body>
+</html>

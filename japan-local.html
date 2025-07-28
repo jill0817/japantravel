@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>日本鄉下深度旅遊推薦</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+      :root {
+        --theme-color: rgba(152, 57, 255, 0.7);
+        --theme-color-light: rgba(152, 57, 255, 0.5);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Noto Sans JP", "Yu Gothic UI", "Hiragino Kaku Gothic ProN",
+          "Meiryo", sans-serif;
+      }
+      body {
+        background-color: #fff;
+        color: #333;
+        line-height: 1.6;
+        padding: 1rem;
+      }
+      h3 {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        text-align: center;
+      }
+      .search-filter {
+        background-color: #fefefe;
+        padding: 3rem 1rem;
+        text-align: center;
+        border-radius: 1rem;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+      .search-bar {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .search-bar input {
+        width: 280px;
+        padding: 0.65rem 1rem;
+        border: 1.5px solid var(--theme-color-light);
+        border-radius: 0.6rem;
+        font-size: 1.1rem;
+      }
+      .search-bar input:focus {
+        outline: none;
+        border-color: var(--theme-color);
+        box-shadow: 0 0 5px var(--theme-color-light);
+      }
+      .search-bar button {
+        padding: 0.65rem 1.5rem;
+        background-color: var(--theme-color);
+        color: white;
+        border: none;
+        border-radius: 0.6rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .search-bar button:hover {
+        background-color: rgba(152, 57, 255, 0.9);
+      }
+      .filter-tags {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .filter-tags span {
+        display: inline-block;
+        margin: 0.35rem 0.6rem;
+        padding: 0.45rem 1rem;
+        background-color: #eee;
+        color: #555;
+        font-size: 1rem;
+        border-radius: 1.2rem;
+        cursor: pointer;
+      }
+      .filter-tags span:hover {
+        background-color: var(--theme-color-light);
+        color: white;
+      }
+      .tour-recommend {
+        max-width: 1100px;
+        margin: 2rem auto 4rem auto;
+      }
+      .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .tour-card {
+        width: 300px;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+      .tour-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 20px rgba(152, 57, 255, 0.3);
+      }
+      .tour-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .card-content {
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card-content h4 {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        color: #333;
+      }
+      .card-content p {
+        color: #555;
+        margin-bottom: 0.8rem;
+        flex-grow: 1;
+      }
+      .rating {
+        color: #ffbb00;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .card-content button {
+        background-color: var(--theme-color);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .swiper-section {
+        max-width: 900px;
+        margin: 3rem auto 5rem auto;
+      }
+      .swiper-slide {
+        text-align: center;
+      }
+      .swiper-slide img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .back-home {
+        max-width: 600px;
+        margin: 1rem auto 0;
+        text-align: left;
+      }
+      .back-home a {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: var(--theme-color-light);
+        color: white;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .back-home a:hover {
+        background-color: var(--theme-color);
+      }
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      .close-btn {
+        margin-top: 1rem;
+        background: #ccc;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+      .reserve-btn {
+        background-color: var(--theme-color);
+        color: white;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 0.6rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="search-filter">
+      <h3>找你想要的旅程</h3>
+      <div class="search-bar">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="輸入關鍵字：如金澤、四國..."
+        />
+        <button onclick="searchTours()">搜尋</button>
+      </div>
+      <div class="filter-tags">
+        <span onclick="filterTag('東北')">#東北</span>
+        <span onclick="filterTag('藝術之旅')">#藝術之旅</span>
+        <span onclick="filterTag('美食')">#美食</span>
+        <span onclick="filterTag('自然秘境')">#自然秘境</span>
+      </div>
+    </section>
+
+    <section class="tour-recommend">
+      <h3>人氣推薦行程</h3>
+      <div class="card-container" id="tourCards"></div>
+    </section>
+
+    <section class="swiper-section">
+      <h3>更多地方風景</h3>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./images/鳥取砂丘.jpg" alt="鳥取砂丘" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/高知市場.jpg" alt="高知在地早市" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/山形藏王.jpg" alt="藏王樹冰" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </section>
+
+    <div class="modal-overlay" id="tourModal">
+      <div class="modal-content">
+        <h4 id="modalTitle">行程標題</h4>
+        <p id="modalDescription">行程說明</p>
+        <div style="margin-top: 1.5rem">
+          <a href="reserve.html"
+            ><button class="reserve-btn">預約出發</button></a
+          >
+        </div>
+        <button onclick="closeModal()" class="close-btn">關閉</button>
+      </div>
+    </div>
+
+    <div class="back-home">
+      <a href="index.html">← 回首頁</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      const tourCards = document.getElementById("tourCards");
+      let allTours = [];
+
+      async function fetchTours() {
+        try {
+          const res = await fetch("http://localhost:3000/api/tours");
+          const data = await res.json();
+          allTours = data;
+          renderTours(data);
+        } catch (err) {
+          console.error("載入旅遊資料失敗：", err);
+          tourCards.innerHTML = "<p>無法載入旅遊資料，請稍後再試。</p>";
+        }
+      }
+
+      function renderTours(tours) {
+        tourCards.innerHTML = "";
+        tours.forEach((tour) => {
+          const card = document.createElement("div");
+          card.className = "tour-card";
+          card.innerHTML = `
+            <img src="${tour.image}" alt="${tour.title}" />
+            <div class="card-content">
+              <h4>${tour.title}</h4>
+              <p>${tour.description}</p>
+              <p class="rating">${tour.rating}</p>
+              <button onclick="showDetail('${tour.title}')">查看詳情</button>
+            </div>
+          `;
+          tourCards.appendChild(card);
+        });
+      }
+
+      function searchTours() {
+        const keyword = document.getElementById("searchInput").value.trim();
+        const filtered = allTours.filter(
+          (tour) =>
+            tour.title.includes(keyword) || tour.description.includes(keyword)
+        );
+        renderTours(filtered);
+      }
+
+      function filterTag(tag) {
+        const filtered = allTours.filter(
+          (tour) => tour.description.includes(tag) || tour.title.includes(tag)
+        );
+        renderTours(filtered);
+      }
+
+      function showDetail(title) {
+        const modal = document.getElementById("tourModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDesc = document.getElementById("modalDescription");
+
+        if (title.includes("金澤")) {
+          modalTitle.textContent = "金澤五日旅遊團";
+          modalDesc.textContent =
+            "行程包含金澤兼六園、近江町市場、和倉溫泉、白川鄉合掌村等，帶你深入體驗北陸風情。";
+        } else if (title.includes("四國")) {
+          modalTitle.textContent = "四國深度探索七日遊";
+          modalDesc.textContent =
+            "深入四國四縣，包括道後溫泉、高知日曜市、大步危溪谷、金刀比羅宮，搭配秘境鐵道體驗與在地美食。";
+        } else if (title.includes("廣島")) {
+          modalTitle.textContent = "廣島與山陰地區文化巡禮五日";
+          modalDesc.textContent =
+            "行程包含嚴島神社、原爆紀念館、倉敷美觀地區及鳥取砂丘，融合歷史人文與自然美景。";
+        } else {
+          modalTitle.textContent = title;
+          modalDesc.textContent = "這個行程的更多資訊即將推出，敬請期待。";
+        }
+
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("tourModal").style.display = "none";
+      }
+
+      const swiper = new Swiper(".mySwiper", {
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+      });
+
+      window.addEventListener("DOMContentLoaded", fetchTours);
+    </script>
+  </body>
+</html>
